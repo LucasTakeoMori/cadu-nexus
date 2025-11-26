@@ -1,0 +1,55 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum ContractStatus {
+  ACTIVE
+  PENDING
+  EXPIRED
+  CANCELLED
+}
+
+model User {
+  id         String   @id @default(uuid())
+  name       String
+  email      String   @unique
+  password   String
+  active     Boolean  @default(true)
+  created_at DateTime @default(now())
+
+  @@map("users")
+}
+
+model Customer {
+  id         String     @id @default(uuid())
+  name       String
+  email      String     @unique
+  phone      String
+  active     Boolean    @default(true)
+  created_at DateTime   @default(now())
+  contracts  Contract[]
+
+  @@map("customers")
+}
+
+model Contract {
+  id          String   @id @default(uuid())
+  customer_id String
+  customer    Customer @relation(fields: [customer_id], references: [id])
+
+  file_path  String
+  file_name  String
+  start_date String
+  end_date   String
+  status     ContractStatus @default(ACTIVE)
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("contracts")
+}

@@ -1,0 +1,9 @@
+services:
+    internal-api:
+        image: bitnami/postgresql
+        ports:
+            - 5432:5432
+        environment:
+            POSTGRES_USER: admin
+            POSTGRES_PASSWORD: c0a5d7u
+            POSTGRES_DB: postgresdb
