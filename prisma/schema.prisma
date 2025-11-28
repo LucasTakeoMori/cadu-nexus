@@ -1,6 +1,5 @@
 generator client {
-  provider = "prisma-client"
-  output   = "../src/generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -31,6 +30,7 @@ model Customer {
   email      String     @unique
   phone      String
   active     Boolean    @default(true)
+  address    String
   created_at DateTime   @default(now())
   contracts  Contract[]
 
