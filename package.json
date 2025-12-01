@@ -4,13 +4,13 @@
     "main": "index.js",
     "type": "module",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
         "start:dev": "tsx watch src/server.ts",
         "start": "node build/server.js",
         "build": "tsup src --out-dir build",
-        "lint": "biome check src",
-        "lint:fix": "biome check --write src",
-        "format": "biome format --write src"
+        "test": "vitest run",
+        "test:watch": "vitest run --watch",
+        "test:coverage": "vitest --coverage",
+        "test:ui": "vitest --ui"
     },
     "keywords": [],
     "author": "",
@@ -21,10 +21,14 @@
         "@types/bcrypt": "6.0.0",
         "@types/bcryptjs": "2.4.6",
         "@types/node": "24.10.1",
+        "@vitest/coverage-v8": "4.0.14",
+        "@vitest/ui": "4.0.14",
         "prisma": "7.0.1",
         "tsup": "8.5.1",
         "tsx": "4.20.6",
-        "typescript": "5.9.3"
+        "typescript": "5.9.3",
+        "vite-tsconfig-paths": "5.1.4",
+        "vitest": "4.0.14"
     },
     "dependencies": {
         "@prisma/adapter-pg": "7.0.1",
