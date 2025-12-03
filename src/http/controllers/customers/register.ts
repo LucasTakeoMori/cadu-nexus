@@ -1,8 +1,7 @@
 import type { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
-import { PrismaCustomersRepository } from "@/repositories/prisma/prisma-customers-repository";
 import { CustomerAlreadyExistsError } from "@/use-cases/errors/customer-already-exists-error";
-import { RegisterCustomerCase } from "@/use-cases/register-customer";
+import { makeRegisterCustomerUseCase } from "@/use-cases/factories/make-register-customer-use-case";
 
 export async function createCustomer(
 	request: FastifyRequest,
@@ -18,11 +17,7 @@ export async function createCustomer(
 	const { name, email, phone, address } = customerSchema.parse(request.body);
 
 	try {
-		const customerRepository = new PrismaCustomersRepository();
-		const registerCustomerUseCase = new RegisterCustomerCase(
-			customerRepository,
-		);
-
+		const registerCustomerUseCase = makeRegisterCustomerUseCase();
 		await registerCustomerUseCase.execute({
 			name,
 			email,
