@@ -8,9 +8,9 @@ interface AuthenticateUseCaseRequest {
 	password: string;
 }
 
-type AuthenticateUseCaseResponse = {
+interface AuthenticateUseCaseResponse {
 	user: User;
-};
+}
 
 export class AuthenticateUseCase {
 	constructor(private usersRepository: UsersRepository) {}
