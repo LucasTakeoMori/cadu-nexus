@@ -3,6 +3,16 @@ import { prisma } from "@/lib/prisma";
 import type { CustomersRepository } from "../customers-repository";
 
 export class PrismaCustomersRepository implements CustomersRepository {
+	async findById(id: string): Promise<Customer | null> {
+		const customer = await prisma.customer.findUnique({
+			where: {
+				id,
+			},
+		});
+
+		return customer;
+	}
+
 	async findByEmail(email: string) {
 		const customer = await prisma.customer.findUnique({
 			where: {
